@@ -796,6 +796,14 @@
         </resource>
         <resource>
             <example value="true"/>
+            <name value="CodeSystem - CDC Opioid Configuration Codes"/>
+            <description value="System of codes that allow configuration of Prescribing Guideline Evaluation"/>
+            <sourceReference>
+                <reference value="CodeSystem/opioidcds-configuration"/>
+            </sourceReference>
+        </resource>
+        <resource>
+            <example value="true"/>
             <name value="Library - OMTK Model Info"/>
             <description value="Opioid Management Terminology Knowledge Base Model Information"/>
             <sourceReference>
@@ -1088,6 +1096,14 @@
             <description value="Indicates urgency/importance of the action"/>
             <sourceReference>
                 <reference value="ValueSet/opioidcds-indicator"/>
+            </sourceReference>
+        </resource>
+        <resource>
+            <example value="true"/>
+            <name value="ValueSet - CDC Opioid Configuration Codes"/>
+            <description value="Allows of configuration of prescribing guideline evaluation"/>
+            <sourceReference>
+                <reference value="ValueSet/opioidcds-configuration"/>
             </sourceReference>
         </resource>
         <resource>

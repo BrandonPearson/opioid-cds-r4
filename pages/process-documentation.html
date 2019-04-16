@@ -337,6 +337,45 @@ monitoring.
     </li>
 </ul>
 
+<a name="strict-vs-loose-eol-exclusions"> </a>
+<h4><span class="sectioncount">8.1.2.9</span> Strict and Loose Active Cancer and End of Life Exclusions <a href="process-documentation.html#strict-vs-loose-eol-exclusions" title="link to here" class="self-link"><img src="target.png" width="20" class="self-link" height="20"/></a></h4>
+<p>The current value sets for active cancer and end-of-life treatment were developed with the assumption
+that the use of high-dose opioids wouldn't be problematic for patients with a higher likelihood of being
+at end-of-life. It specifically includes malignant, metastatic and pancreatic cancer, and other diagnoses suggesting
+end-of-life that are not malignancy (e.g., fulminant liver failure).
+</p>
+
+<p>The pilot at University of Utah determined that physicians did not trust EHR suggesting that a cancer
+diagnosis was active (Vs inactive or resolved). Therefore, physicians requested that they manually
+indicate a request to “snooze” or turn off the alert for a period of time based on their determination
+about disease activity at the time the alert fires. Therefore, the ability to systematically determine
+disease activity can be offered as a configurable element in the algorithm, allowing implementing organizations
+to determine if they want to turn it on or off. Additionally, the value set is an exclusion. Some of the cancers
+included in the existing CDC recommended set are conditions for which opioid management may be beneficial.
+Such patients may be receiving opioids for other conditions than the cancer defined
+(e.g., opioids for back pain for a patient with localized skin cancers).
+Including such cancers in the value set completely excludes such situations from the recommendations.
+The list currently in the algorithm was intentionally created to make the exclusion group small and allow a local
+implementer to modify it as locally appropriate. We can include two value sets, one more restrictive
+and one more expansive allowing the local sites to determine which to use.
+</p>
+
+<p>Similarly, there are a number of patients who do not have cancer but who have difficulty swallowing.
+Therefore, the pilot physicians considered that systematically removing all liquid opioids
+could remove patients who should be evaluated for overuse. Hence, physicians preferred the option to
+manually override the alert with a request to “snooze” or turn off the alert for a period of time based
+on their determination of use of liquid opioids for active or terminal cancer. Hence, including liquid
+opioids as systematic exclusions should, at best, be offered as a configurable element in the algorithm,
+allowing implementing organizations to determine if they want to turn it on or off. 
+The value set referencing liquid opioids is located at:
+http://build.fhir.org/ig/cqframework/opioid-cds/ValueSet-opioids-indicating-end-of-life.html.
+</p>
+
+<p>An option for "strict" or "loose" (defaulted to "strict") was added to allow the local override of the
+active cancer and end of life exclusions. The value set referencing the configuration options is located at:
+http://build.fhir.org/ig/cqframework/opioid-cds/ValueSet-opioids-configuration.html.
+</p>
+
 <a name="funcdesc"> </a>
 <h3><span class="sectioncount">8.1.3</span> Functional Description <a href="process-documentation.html#funcdesc" title="link to here" class="self-link"><img src="target.png" width="20" class="self-link" height="20"/></a></h3>
 <p>The following two criteria must be satisfied for every patient for each recommendation:</p>

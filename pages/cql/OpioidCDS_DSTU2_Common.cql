@@ -7,6 +7,8 @@ include OMTKLogic version '0.0.1' called OMTKLogic
 
 codesystem "SNOMED": 'http://snomed.info/sct'
 
+codesystem "Opioid CDS Configuration" : 'http://fhir.org/guides/cdc/opioid-cds/ValueSet/opioidcds-configuration'
+
 valueset "Benzodiazepines": 'http://fhir.org/guides/cdc/opioid-cds/ValueSet/benzodiazepines'
 valueset "End of Life Conditions": 'http://fhir.org/guides/cdc/opioid-cds/ValueSet/end-of-life-conditions'
 // Harvested from VSAC - OID: 2.16.840.1.113762.1.4.1108.15
@@ -25,6 +27,10 @@ valueset "End Of Life Opioids": 'http://fhir.org/guides/cdc/opioid-cds/ValueSet/
 valueset "Substance Abuse": 'http://fhir.org/guides/cdc/opioid-cds/ValueSet/substance-abuse'
 
 code "Referral to Hospice": '306205009' from "SNOMED"
+code "Strict" : 'strict' from "Opioid CDS Configuration" 
+
+parameter "Evaluation Mode" Code default "Strict"
+
 
 // TODO: Capture process decisions for long-term opioid use
 define IsForChronicPain: true
@@ -45,6 +51,7 @@ define "Ambulatory Opioid Rx":
   [MedicationOrder: "Ambulatory Abuse Potential Opioids"] Rx
 
 define function "Is Context Prescription End of Life Opioid?" (ContextPrescriptions List<MedicationOrder>):
+  "Evaluation Mode" = "Strict" and
   exists (
     ContextPrescriptions Rx
       where Rx.medicationCodeableConcept in "End Of Life Opioids"
@@ -99,7 +106,9 @@ define "End of Life Assessment":
     )
   )
   // 3. Medications indicating end of life
-  or exists (
+  or
+  ("Evaluation Mode" = "Strict" and
+   exists (
     (
       [MedicationAdministration: code in "End Of Life Opioids"] MA
         where MA.status.value in { 'in-progress', 'on-hold', 'completed' }
@@ -119,7 +128,7 @@ define "End of Life Assessment":
       [MedicationStatement: code in "End Of Life Opioids"] MS
         where MS.status.value in { 'active', 'completed', 'intended' }
     )
-  )
+  ))
 
 define function Prescriptions(Orders List<MedicationOrder>):
   Orders O

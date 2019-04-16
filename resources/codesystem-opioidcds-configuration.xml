@@ -1,0 +1,20 @@
+<CodeSystem xmlns="http://hl7.org/fhir">
+    <id value="opioidcds-configuration"/>
+    <url value="http://fhir.org/guides/cdc/opioid-cds/CodeSystem/opioidcds-configuration"/>
+    <name value="CDC Opioid CDS Configuration"/>
+    <status value="draft"/>
+    <experimental value="false"/>
+    <description value="Allows configuration of the evaluation of the prescribing guidelines"/>
+    <caseSensitive value="true"/>
+    <content value="complete"/>
+    <concept>
+        <code value="strict"/>
+        <display value="Strict"/>
+        <definition value="Use strict processing of the presribing guidelines"/>
+    </concept>
+    <concept>
+        <code value="loose"/>
+        <display value="Loose"/>
+        <definition value="Use loose processing the the prescribing guidelines"/>
+    </concept>
+</CodeSystem>
